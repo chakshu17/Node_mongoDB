@@ -3,8 +3,8 @@ const express = require("express");
 const path = require("path");
 
 const errorController = require("./controllers/error");
-const mongoConnect = require("./util/database").mongoConnect
-;
+const mongoConnect = require("./util/database").mongoConnect;
+const User = require("./models/user");
 
 const app = express();
 
@@ -18,14 +18,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public"))); // for styling , we give path to file for html
 
 app.use((req, res, next) => {
-	// User.findByPk(1)
-	// 	.then((user) => {
-	// 		req.user = user;
-	// 		next();
-	// 	})
-	// 	.catch((err) => {
-	// 		console.log(err);
-	// 	});
+	 User.findById('5fa65b89d13d54d819090f76')
+	 	.then((user) => {
+	 		req.user = user;
+	 		next();
+	 	})
+	 	.catch((err) => {
+	 		console.log(err);
+	 	});
 	next();
 });
 
