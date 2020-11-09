@@ -18,14 +18,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public"))); // for styling , we give path to file for html
 
 app.use((req, res, next) => {
-	 User.findById('5fa65b89d13d54d819090f76')
-	 	.then((user) => {
-	 		req.user = user;
-	 		next();
-	 	})
-	 	.catch((err) => {
-	 		console.log(err);
-	 	});
+	User.findById("5fa65b89d13d54d819090f76")
+		.then((user) => {
+			req.user = new User(user.name, user.email, user.cart, user._id);
+			next();
+		})
+		.catch((err) => {
+			console.log(err);
+		});
 });
 
 app.use("/admin", adminRoutes);
