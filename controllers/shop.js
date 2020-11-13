@@ -1,6 +1,6 @@
 const Product = require("../models/product");
-const Order = require("../models/order");
-const { Logger } = require("mongodb");
+// const Order = require("../models/order");
+// const { Logger } = require("mongodb");
 
 // to get all products
 exports.getProducts = (req, res, next) => {
