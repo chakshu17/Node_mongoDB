@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 
 const errorController = require("./controllers/error");
 // const mongoConnect = require("./util/database").mongoConnect;
-// const User = require("./models/user");
+const User = require("./models/user");
 
 const app = express();
 
@@ -20,16 +20,16 @@ const shopRoutes = require("./routes/shop");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public"))); // for styling , we give path to file for html
 
-// app.use((req, res, next) => {
-// 	User.findById("5fa65b89d13d54d819090f76")
-// 		.then((user) => {
-// 			req.user = new User(user.name, user.email, user.cart, user._id);
-// 			next();
-// 		})
-// 		.catch((err) => {
-// 			console.log(err);
-// 		});
-// });
+app.use((req, res, next) => {
+	User.findById("5fae1c0df3c5fe1ac80c4ddb")
+		.then((user) => {
+			req.user = user;
+			next();
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+});
 
 app.use("/admin", adminRoutes);
 app.use(shopRoutes);
@@ -45,6 +45,19 @@ mongoose
 		"mongodb+srv://chakshu:chakshu@cluster0.fjlpu.mongodb.net/shop?retryWrites=true&w=majority"
 	)
 	.then((result) => {
+		User.findOne().then((user) => {
+			if (!user) {
+				const user = new User({
+					name: "Demon",
+					email: "demon@gmail.com",
+					cart: {
+						items: [],
+					},
+				});
+				user.save();
+			}
+		});
+
 		app.listen(3000);
 	})
 	.catch((err) => {
