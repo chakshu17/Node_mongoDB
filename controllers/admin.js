@@ -18,7 +18,7 @@ exports.postAddProducts = (req, res, next) => {
 		price: price,
 		description: description,
 		imageUrl: imageUrl,
-		userId: req.user
+		userId: req.user,
 	});
 	product
 		.save()
@@ -77,7 +77,10 @@ exports.postEditProduct = (req, res, next) => {
 
 exports.getProducts = (req, res, next) => {
 	Product.find()
+		// .select("title price -_id") to select any particular data, - sign dictates that field should be eliminated
+		// .populate("userId", "name") 
 		.then((products) => {
+			console.log(products);
 			res.render("admin/products", {
 				prods: products,
 				pageTitle: "All Products",
