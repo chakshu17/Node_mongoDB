@@ -3,9 +3,9 @@ exports.getLogin = (req, res, next) => {
 	// const isLoggedIn =
 	// 	req.get("Cookie").split(";")[0].trim().split("=")[1] === "true";
 	console.log(req.session.isLoggedIn);
-	console.log(
-		"IN this when you press login yoiu have a user, so whenever you comeack to login opage console will show truer, otherwiasse undefined. BUT, if you change the browser and still login it will not becausetherer is no pprior knowledge of user"
-	);
+	// console.log(
+	// 	"IN this when you press login yo u have a user, so whenever you comeack to login opage console will show truer, otherwiasse undefined. BUT, if you change the browser and still login it will not becausetherer is no pprior knowledge of user"
+	// );
 	res.render("auth/login", {
 		pageTitle: "Login",
 		path: "/login",
