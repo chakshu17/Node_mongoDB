@@ -3,6 +3,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const express = require("express");
 const mongoose = require("mongoose");
+const session = require("express-session");
 
 const errorController = require("./controllers/error");
 // const mongoConnect = require("./util/database").mongoConnect;
@@ -19,6 +20,9 @@ const authRoutes = require("./routes/auth");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public"))); // for styling , we give path to file for html
+app.use(
+	session({ secret: "my secret", resave: false, saveUninitialized: false })
+);// session middleware initialized
 
 app.use((req, res, next) => {
 	User.findById("5fae1c0df3c5fe1ac80c4ddb")
