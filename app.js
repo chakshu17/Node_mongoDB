@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session");
-const MongoDbStore = require("connect-mongodb-session")(session);
+const MongoDBStore = require("connect-mongodb-session")(session);
 
 const errorController = require("./controllers/error");
 // const mongoConnect = require("./util/database").mongoConnect;
@@ -14,8 +14,8 @@ const MONGODB_URI =
 	"mongodb+srv://chakshu:chakshu@cluster0.fjlpu.mongodb.net/shop";
 
 const app = express();
-const store = new MongoDbStore({
-	url: MONGODB_URI,
+const store = new MongoDBStore({
+	uri: MONGODB_URI,
 	collection: "sessions",
 });
 
