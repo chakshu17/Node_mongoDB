@@ -18,8 +18,14 @@ exports.postLogin = (req, res, next) => {
 	req.session.isLoggedIn = true;
 	res.redirect("/");
 };
-
 // res.setHeader("Set-Cookie", "isloggedIn=true; Max-Age=10"); => cookie live upto 10s only i.e. no is is seconds
 // res.setHeader("Set-Cookie", "isloggedIn=true; Expires= "); => cookie live upto given date only { format can be searched }
 // res.setHeader("Set-Cookie", "isloggedIn=true; Secure"); => cookie does not allow http server to acces coookie
 // res.setHeader("Set-Cookie", "isloggedIn=true; HttpOnly"); => cookie omly allow http server to access coookie
+
+exports.postLogout = (req, res, next) => {
+	req.session.destroy((err) => {
+		console.log(err);
+		res.redirect("/");
+	});
+};
