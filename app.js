@@ -37,6 +37,15 @@ app.use(
 	})
 ); // session middleware initialized
 
+// app.use((req,res,next)=>{
+// 	User.findById(req.session.user._id)
+//     .then(user => {
+//       req.user= user;
+//       next()
+//     })
+//     .catch(err => console.log(err));
+// })
+
 app.use((req, res, next) => {
 	User.findById("5fae1c0df3c5fe1ac80c4ddb")
 		.then((user) => {
